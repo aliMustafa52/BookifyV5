@@ -37,7 +37,7 @@
                         <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
                     </svg>
                 </span>
-                                <!--begin::Content-->
+                <!--begin::Content-->
                 <div class="d-flex flex-column pe-0 pe-sm-10 align-self-center mt-2">
                     <h5>No Categories To Display</h5>
                 </div>
@@ -46,7 +46,40 @@
         }
         else
         {
-            <h1>Categories</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800">
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Created On</th>
+                            <th>Last Updated On</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <td>@category.Name</td>
+                                
+                                <td>
+                                    <span class="badge badge-light-@(category.IsDeleted ? "danger" : "success")">
+                                        @(category.IsDeleted ? "Deleted" : "Available")
+                                        </span>
+                                </td>
+                                <td>@category.CreatedOn</td>
+                                <td>@category.LastUpdatedOn</td>
+                                <td>
+                                    <a class="btn btn-light-primary btn-sm" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
     </div>
 </div>
